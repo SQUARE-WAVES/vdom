@@ -46,15 +46,17 @@ lists and sub-trees etc.
 #### vdom_loop.js
 this contains a boilerplate function for setting up the vdom loop. There are a few different ways to set up a vdom program and the one I've chosen is the laziest.
 
-you have 4 arguments. 
-    * a root element, this is a dom element where your stuff will render, note the original element will be thrown away, and replaced by what your program makes!
-    * a state, this is an object that will be mutated by events
-    * an event handler, which takes the state, an event type, and some event data and then mutates the state returning true if you want to re-render the dom, false if you want to ignore it
-    * a render function, which takes the state, and returns a new virtual dom representing what you want on the screen
+you have 4 arguments:
 
-you get back an object with a couple of methods.
-    * "go" which initializes the dom and starts the loop running
-    * "post" which lets external things like setInterval or fetch post events to the program
+    - a root element, this is a dom element where your stuff will render, note the original element will be thrown away, and replaced by what your program makes!
+    - a state, this is an object that will be mutated by events
+    - an event handler, which takes the state, an event type, and some event data and then mutates the state returning true if you want to re-render the dom, false if you want to ignore it
+    - a render function, which takes the state, and returns a new virtual dom representing what you want on the screen
+
+you get back an object with 2 methods:
+
+    - "go" which initializes the dom and starts the loop running
+    - "post" which lets external things like setInterval or fetch post events to the program
 
 this style is pretty similar to the way Elm does things, except instead of creating a new state with every update we mutate an existing one, and we don't have a difference between "commands"
 and "updates" they are all just events. If you need to use fetch or something you just use it and pass your event posting function with it. 
