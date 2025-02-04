@@ -18,7 +18,7 @@ you use the hscript to make your dom and then the vdom_loop thing sets everythin
 ## how do I use the examples?
 the examples assume you have cloned this repo and have an HTTP server that will serve it as static files. All the urls are relative.
 
-### a brief explainer of the main files and what they do
+## a brief explainer of the main files and what they do
 
 #### core.js
 this is the actual vdom core, you should, in general not need to import this directly, it contains the key virtual dom ideas, nodes, diffing, and applying patches
