@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Virtual Dom SVG Example Page</title>
+  </head>
+
+  <body>
+    <div> This part here is just regular dom</div>
+    <div id="vdom_root"></div>
+  </body>
+
+  <script type="module">
+    import {h} from "../hscript.js"
+    import * as svg from "../svg.js" 
+    import {vdom_loop} from "../vdom_loop.js"
+
+    console.log(svg)
+
+    const events = {};
+
+    const ev_handler = (state,type,data) => {
+      return events[type]?.(state) || false;
+    }
+
+    const render = (state,post) => svg.root({},{},[
+      svg.rect(10,10,20,20),
+      svg.circle(30,30,5)
+    ]);
+    
+    const vdl = vdom_loop(document.getElementById("vdom_root"),{"count":9},ev_handler,render);
+    vdl.go();
+
+  </script>
+</html>

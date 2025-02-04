@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Virtual Dom Example Page</title>
+  </head>
+
+  <body>
+    <div>
+      <p>
+        Hello, this is a basic example of how to set up a virtual dom program using this
+        library. It makes a really basic "counter" where you can click the buttons to move the count
+        up or down. Real heavy stuff.
+      </p>
+      <p>
+        To check out what's going on you can right click and view source. Just like in the olden days!
+        This is because these are straight up ES6 modules, they aren't minified or anything the code
+        is all right there!
+      </p>
+    </div>
+
+    <div style="border-bottom: 1px solid black"> everything below this line is the actual virtual dom program </div>
+    <span id="vdom_root" style="padding: 10px"></div>
+  </body>
+
+  <script type="module">
+    import {h} from "../hscript.js"
+    import {vdom_loop} from "../vdom_loop.js"
+
+    const events = {
+      "up":(state) => { state.count = state.count + 1; return true },
+      "dn":(state) => { state.count = state.count - 1; return true }
+    }
+
+    const ev_handler = (state,type,data) => {
+      return events[type]?.(state) || false;
+    }
+
+    const render = (state,post) => h("div",{},{},[
+      `${state.count}`,
+      h("div",{},{},[
+        h("button",{},{"onclick":()=>post("up")},"+"),
+        h("button",{},{"onclick":()=>post("dn")},"-")
+      ])
+    ]);
+    
+    const vdl = vdom_loop(document.getElementById("vdom_root"),{"count":9},ev_handler,render);
+    vdl.go();
+
+  </script>
+</html>
